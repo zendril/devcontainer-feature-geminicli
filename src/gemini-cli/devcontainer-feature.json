@@ -1,6 +1,6 @@
 {
   "id": "gemini-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Gemini CLI (via npm)",
   "documentationURL": "https://geminicli.com/docs/",
   "description": "Installs Google's Gemini CLI for AI-powered terminal access with persistent config",

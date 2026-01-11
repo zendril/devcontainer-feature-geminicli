@@ -30,10 +30,20 @@ jobs:
 
       - name: Publish features
         run: |
-          devcontainer features publish \
+          set +e
+          output=$(devcontainer features publish \
             src/gemini-cli \
             --namespace ${{ github.repository_owner }}/features \
-            --registry ghcr.io
+            --registry ghcr.io 2>&1)
+          exit_code=$?
+          echo "$output"
+
+          if echo "$output" | grep -q "already exists, skipping"; then
+            echo "::error::Version already exists! Please bump the version in devcontainer-feature.json"
+            exit 1
+          fi
+
+          exit $exit_code
 
       - name: Create release summary
         run: |
