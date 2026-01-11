@@ -10,7 +10,8 @@ Gemini CLI is a command-line interface that brings Google's Gemini AI model capa
 
 - Installs the latest version of `@google/gemini-cli` via npm
 - Automatically includes the Google GenAI Code Assist VS Code extension
-- Persistent configuration and history across container rebuilds
+- Automatic persistence of authentication tokens, configuration, and history
+- Zero-configuration setup - no manual mounts or environment variables needed
 - Seamless integration with DevContainer workflows
 
 ## Installation
@@ -66,6 +67,16 @@ This feature includes the `Google.genai-code-assist` VS Code extension, which pr
 ## How It Works
 
 This feature uses [nanolayer](https://github.com/devcontainers-extra/nanolayer) to keep container layers minimal and leverages the battle-tested [devcontainers-extra npm-package feature](https://github.com/devcontainers-extra/features) for reliable npm package installation.
+
+## Configuration Persistence
+
+This feature automatically persists your Gemini CLI configuration across container rebuilds:
+
+- **Volume Mount**: A named volume `gemini-cli-config` is automatically created and mounted at `/home/vscode/.gemini`
+- **Environment Variable**: `GEMINI_CONFIG_DIR` is automatically set to point to the persistent storage location
+- **What's Persisted**: Authentication tokens, CLI settings, conversation history, and any other Gemini CLI data
+
+You don't need to configure anything manually - just install the feature and your Gemini CLI state will be preserved across container rebuilds, updates, and recreation. This means you only need to authenticate once, and your settings and history will be available every time you rebuild your container.
 
 ## Troubleshooting
 
