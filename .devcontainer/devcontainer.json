@@ -1,0 +1,22 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+	"name": "Ubuntu",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/base:noble",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+		"ghcr.io/devcontainers-extra/features/devcontainers-cli:1": {},
+		"ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
+	},
+	"mounts": [
+		// Persist Claude Code config (auth tokens, settings) in ~/.claude directory
+		// Shared across all devcontainers for convenience with trusted repos
+		"source=claude-code-config,target=/home/vscode/.claude,type=volume",
+	],
+
+	"containerEnv": {
+		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+		// Point the compliance scripts to the sidecar service
+	}
+}
