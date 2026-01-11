@@ -14,11 +14,12 @@ ensure_nanolayer nanolayer_location "v0.5.6"
 
 # Use nanolayer to install Gemini CLI via the devcontainers-extra npm-package feature
 # This approach keeps container layers minimal and reuses battle-tested npm installation logic
+# Force Node.js LTS to ensure compatibility with Gemini CLI's requirements
 $nanolayer_location \
     install \
     devcontainer-feature \
     "ghcr.io/devcontainers-extra/features/npm-package:1.0.4" \
-    --option package='@google/gemini-cli' --option version="${VERSION:-latest}"
+    --option package='@google/gemini-cli' --option version="${VERSION:-latest}" --option nodeVersion='lts'
 
 echo 'Done!'
 

@@ -26,6 +26,8 @@ Add this feature to your `.devcontainer/devcontainer.json`:
 }
 ```
 
+Node.js LTS will be automatically installed if not already present in your container.
+
 ### With Custom Version
 
 To install a specific version of Gemini CLI:
@@ -58,7 +60,7 @@ For authentication and additional configuration, refer to the [official Gemini C
 
 ## Dependencies
 
-This feature automatically installs after the Node.js feature if present. If Node.js is not already in your container, it will be installed as a dependency.
+This feature automatically ensures Node.js LTS is installed in your container. If Node.js is not present, it will be installed automatically. If an older version of Node.js exists, the feature will upgrade to LTS to ensure compatibility with Gemini CLI.
 
 ## VS Code Integration
 
