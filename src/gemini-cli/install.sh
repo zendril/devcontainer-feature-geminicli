@@ -12,14 +12,23 @@ source "${SCRIPT_DIR}/library_scripts.sh"
 # of the script
 ensure_nanolayer nanolayer_location "v0.5.6"
 
+# First, ensure Node.js LTS is installed (Gemini CLI requires Node.js 20+)
+# This will install Node.js LTS even if an older version already exists
+echo "Installing Node.js LTS for Gemini CLI compatibility..."
+$nanolayer_location \
+    install \
+    devcontainer-feature \
+    "ghcr.io/devcontainers/features/node:1" \
+    --option version='lts'
+
 # Use nanolayer to install Gemini CLI via the devcontainers-extra npm-package feature
 # This approach keeps container layers minimal and reuses battle-tested npm installation logic
-# Force Node.js LTS to ensure compatibility with Gemini CLI's requirements
+echo "Installing Gemini CLI..."
 $nanolayer_location \
     install \
     devcontainer-feature \
     "ghcr.io/devcontainers-extra/features/npm-package:1.0.4" \
-    --option package='@google/gemini-cli' --option version="${VERSION:-latest}" --option nodeVersion='lts'
+    --option package='@google/gemini-cli' --option version="${VERSION:-latest}"
 
 echo 'Done!'
 
